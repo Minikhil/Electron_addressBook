@@ -1,0 +1,62 @@
+/* zero out margins and padding to get full bleed effect */
+html, body {
+  margin:0;
+  padding:0;
+  height:100%;
+}
+
+/* this is the wrapper around the entire app */
+.contactapp {
+  background: lightblue;
+  display:flex;
+  justify-content: center;
+  align-items: stretch;
+  height:100%;
+}
+
+/* left column, list of contacts */
+.contactlist {
+  padding:0px;
+  margin:10px;
+  min-height: 200px;
+  flex-basis:60%;
+}
+
+.contactlist table {
+  width:100%;
+  margin:0;
+  border-spacing: 0px;
+  padding:5px;
+}
+
+.contactlist tr:nth-child(even) {
+  background:lightgray;
+}
+
+.contactlist tr:hover {
+  background: darkblue;
+  color:white;
+  cursor:pointer;
+}
+
+/* right column, contact details */
+.contact{
+  background: darkblue;
+  padding:0px;
+  margin:0px;
+  height:100%;
+  float:right;
+  flex-basis: 40%;
+}
+
+.contactpic{
+  text-align:center;
+  padding:10px;
+}
+
+.contact table {
+  padding:5px;
+  margin:15px;
+  background:white;
+  width:90%;
+}
