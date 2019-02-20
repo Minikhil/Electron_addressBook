@@ -14,6 +14,11 @@ $('#addbtn').on('click', () => {
 
   let name = $('#contactname').val()
   let number = $('#contactnumber').val()
+  let company = $('#contactcompany').val()
+  let address = $('#contactaddress').val()
+  let email = $('#contactemail').val()
+  let url = $('#contacturl').val()
+  let birthday = $('#contactbirthday').val()
 
   fs.appendFileSync('contacts.txt', name+","+number+'\n', (err) => {
     if (err) throw err;
@@ -25,13 +30,19 @@ $('#addbtn').on('click', () => {
 })
 
 function addEntry(name, number){
+  //CREATRING DICTIONARY
   var contact = {};
   contact['name'] = name;
   contact['number'] = number;
+  contact['company'] = company;
+  contact['address'] = address;
+  contact['email'] = email;
+  contact['url'] = url;
+  contact['birthday'] = birthday;
   contacts.push(contact);
   var index = contacts.length-1;
 
-  let updateString = "<tr onclick='loadDetails(" + index + ")'><td>" + name + "</td><td>" + number + "</td></tr>"
+  let updateString = "<tr onclick='loadDetails(" + index + ")'><td>" + name + "</td><td>" + number + "</td><td>" + company + "</td><td>" + address + "</td><td>" + email + "</td><td>" + birthday + "</td><td>" + url + "</td></tr>"
 
   $('#contactlist').append(updateString)
 }
@@ -50,7 +61,7 @@ function deleteEntry(index){
 
     contacts.splice(index, 1);
     fs.truncateSync('contacts.txt');
-    
+
     contacts.forEach((contact, index) => {
 
       fs.appendFileSync('contacts.txt', contact.name+","+contact.number+'\n', (err) => {
