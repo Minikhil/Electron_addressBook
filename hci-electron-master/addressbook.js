@@ -31,6 +31,27 @@ $('#cancelbtn').on('click', () => {
 //   ipcRenderer.send('asynchronous-message', 'closeAndRefresh')
 //
 // })
+const addbtn = document.getElementById('addbtn');
+const contactemail = document.getElementById('contactemail');
+
+// contactemail.addEventListener('keyup', function (event) {
+//   isValidEmail = contactemail.checkValidity();
+//
+//   if ( isValidEmail ) {
+//     addbtn.disabled = false;
+//   } else {
+//     addbtn.disabled = true;
+//   }
+// });
+
+function emailValidation(){
+  console.log("email validating")
+  isValidEmail = contactemail.checkValidity();
+
+  if (isValidEmail ) {
+    addbtn.disabled = false;
+  }
+}
 
 function addbtnHandeler(){
   let name = document.getElementById("contactname").value;
@@ -120,9 +141,11 @@ function loadAndDisplayContacts() {
       $('#contactlist').html("<tr><th>Name</th><th>Phone</th><th>Company</th></tr>");
       data.forEach((contact, index) => {
          let [ name, number, company ] = contact.split(',')
-         //if (name && number){
+
+         //WILL ONLY ADD IF THE DATA FIELDS IN IF CONDITION FILLEED OUT
+         if (name && number){
            addEntry(name, number, company)
-         //}
+         }
       })
       if (contacts.length > 0){
         loadDetails(0);

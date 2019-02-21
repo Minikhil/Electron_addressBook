@@ -5,42 +5,40 @@
 </head>
 <body>
 <form id="addform">
-  <label>Name</label>
-  <input type="text" name="contactname" id="contactname" />
+
+  <input type="text" name="contactname" id="contactname" placeholder="Name"  required />
   <br>
 
-  <label>Number</label>
-  <input type="text" name="contactnumber" id="contactnumber" />
+
+  <input type="tel" name="contactnumber" id="contactnumber" placeholder="Number" required />
   <br>
 
-  <label>Address</label>
-  <input type="text" name="contactaddress" id="contactaddress" />
+  <input type="text" name="contactcompany" id="contactcompany" placeholder="Company"  />
   <br>
 
-  <label>Company</label>
-  <input type="text" name="contactcompany" id="contactcompany" />
+  <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name="contactemail" id="contactemail" oninput="emailValidation()" placeholder="Email" />
   <br>
 
-  <label>Birthday</label>
-  <input type="text" name="contactbirthday" id="contactbirthday" />
+  <input type="text" name="contactaddress" id="contactaddress" placeholder="Address"  />
   <br>
 
-  <label>Email</label>
-  <input type="text" name="contactemail" id="contactemail" />
+
+
+
+  <input type="date" name="contactbirthday" id="contactbirthday" placeholder="Birthday"  />
   <br>
 
-  <label>URL</label>
-  <input type="text" name="contacturl" id="contacturl" />
+  <input type="url" name="contacturl" id="contacturl" placeholder="URL" />
   <br>
 
   <label>Photo</label>
-  <input type="text" name="contactphoto" id="contactphoto" />
+  <input type="file"  name="contactphoto" accept="image/*" id="contactphoto" />
   <br>
 
 
 
 
-  <button id="addbtn" onclick="addbtnHandeler()">Add</button>
+  <button id="addbtn" onclick="addbtnHandeler()" disabled>Add</button>
   <button id="cancelbtn">Cancel</button>
 </form>
 <script src="./addressbook.js"></script>
