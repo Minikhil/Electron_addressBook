@@ -11,23 +11,21 @@
 
     <div class="contactlist">
       <div>
-      <h1>Contacts<span style="float:right"><i class="fas fa-plus-square" onclick="showAddContactModal();"></i></span></h1>
+      <!-- ADD BUTTON -->
+      <h1>Nikhil's Contacts<span style="float:right"><i class="fas fa-plus-square" onclick="showAddContactModal();"></i></span></h1>
       </div>
       <hr>
+      <!-- CONATCT LIST ON LEFT -->
       <table id="contactlist">
         <tr>
           <th>Name</th>
           <th>Phone</th>
           <th>Company</th>
-          <th>Address</th>
-          <th>Email</th>
-          <th>Birthday</th>
-          <th>URL</th>
         </tr>
       </table>
     </div>
     <div class="contact">
-
+    <!-- CONTACT PIC -->
       <div class="contactpic">
         <img src="default.png" width="150px" >
         <div style="text-align:center">
@@ -105,6 +103,7 @@
 <script src="./addressbook.js"></script>
 <script>
   // when the document loads, load the contact list from file
+  //When click on contact row on left loads info on the right panel
   $(document).ready(loadAndDisplayContacts());
   require('electron').ipcRenderer.on('asynchronous-message', (event, message) => {
         console.log(message)

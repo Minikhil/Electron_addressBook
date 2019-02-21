@@ -1,19 +1,10 @@
-sarah,23425
-jim, 23423d
-asdf,asdf
-sarah,23425
-jim, 23423d
-Nikhil,646
-Nik,656
-,646
-bh,67
-nIKHIL,
-NIKHIL,646
-Nik,626
-Nik,646
-,
-m,m
-Nik,hj
-Nikhil ,Mithani 
-Nik,123,Wells
-Nishat,716,Riteaid,buffalo,nsc,spet 3rd,ww.pohono
+sarah,23425,Buffalo
+Nikhil,6467252864,Wells,nyc,nikhilmi@buffalo.edu,04/28/1997,nikhilmithani.com
+Hi,why,work,no,,,
+HIO,,HOO,,,,
+JHI,,HOHO,,,,
+SAI,WOW,,,,,
+SAI ,HEY,BEY,HU,,,
+Toby,hi,,hjllj,,,
+Nigga,plss,PLSSSS,work,,,
+Nikhil,646,hyh,746,,gh,

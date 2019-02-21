@@ -10,16 +10,36 @@ $('#cancelbtn').on('click', () => {
   ipcRenderer.send('asynchronous-message', 'closeModal')
 })
 
-$('#addbtn').on('click', () => {
+//Upon clicking add we write the data from form into contacts.txt file
+// $('#addbtn').on('click', () => {
+//
+//   //GETTING INFO FROM FORMS INPUT FIELD
+//   let name = $("input[name=contactname]").val()
+//   let number = $('#contactnumber').val()
+//   let company = $("input[name=contactcompany]").val()
+//   let address = $('#contactaddress').val()
+//   let email = $('#contactemail').val()
+//   let url = $('#contacturl').val()
+//   let birthday = $('#contactbirthday').val()
+//
+//   //WRITING THE INFO ABOVE TO TEXT FILE
+//   fs.appendFileSync('contacts.txt', name+","+number+ "," + company + "," + address + "," + email + "," + birthday + "," + url+'\n', (err) => {
+//     if (err) throw err;
+//     console.log("the data was appended!");
+//   });
+//
+//   ipcRenderer.send('asynchronous-message', 'closeAndRefresh')
+//
+// })
 
-  //GETTING INFO FROM FORMS INPUT FIELD
-  let name = $('#contactname').val()
-  let number = $('#contactnumber').val()
-  let company = $('#contactcompany').val()
-  let address = $('#contactaddress').val()
-  let email = $('#contactemail').val()
-  let url = $('#contacturl').val()
-  let birthday = $('#contactbirthday').val()
+function addbtnHandeler(){
+  let name = document.getElementById("contactname").value;
+  let number = document.getElementById("contactnumber").value;
+  let company = document.getElementById("contactcompany").value;
+  let address = document.getElementById("contactaddress").value;
+  let email = document.getElementById("contactemail").value;
+  let url = document.getElementById("contacturl").value;
+  let birthday = document.getElementById("contactbirthday").value;
 
   //WRITING THE INFO ABOVE TO TEXT FILE
   fs.appendFileSync('contacts.txt', name+","+number+ "," + company + "," + address + "," + email + "," + birthday + "," + url+'\n', (err) => {
@@ -28,15 +48,24 @@ $('#addbtn').on('click', () => {
   });
 
   ipcRenderer.send('asynchronous-message', 'closeAndRefresh')
+}
 
-})
 
-function addEntry(name, number){
-  //CREATRING DICTIONARY
+
+
+//Need to pass in the data var as parameters and storing data in obj to be accessed
+//Gets called by loadAndDisplayContacts()
+function addEntry(name, number, company){
+  //CREATRING OBJ
+  //* conatct {
+  //            name: Nikhil
+  //            number: 646
+  //            ...
+//            }
   var contact = {};
   contact['name'] = name;
   contact['number'] = number;
-  // contact['company'] = company;
+  contact['company'] = company;
   // contact['address'] = address;
   // contact['email'] = email;
   // contact['url'] = url;
@@ -44,9 +73,9 @@ function addEntry(name, number){
   contacts.push(contact);
   var index = contacts.length-1;
 
-  let updateString = "<tr onclick='loadDetails(" + index + ")'><td>" + name + "</td><td>" + number + "</td></tr>"
-  //<td>" + company + "</td><td>" + address + "</td><td>" + email + "</td><td>" + birthday + "</td><td>" + url + "</td></tr>"
+  let updateString = "<tr onclick='loadDetails(" + index + ")'><td>" + name + "</td><td>" + number + "</td><td>" + company + "</td></tr>"
 
+  //HTML code gets appended to left panel, adding rows to contact list <tr>
   $('#contactlist').append(updateString)
 }
 
@@ -88,12 +117,12 @@ function loadAndDisplayContacts() {
    //Check if file exists
    if(fs.existsSync(filename)) {
       let data = fs.readFileSync(filename, 'utf8').split('\n')
-      $('#contactlist').html("<tr><th>Name</th><th>Phone</th></tr>");
+      $('#contactlist').html("<tr><th>Name</th><th>Phone</th><th>Company</th></tr>");
       data.forEach((contact, index) => {
-         let [ name, number ] = contact.split(',')
-         if (name && number){
-           addEntry(name, number)
-         }
+         let [ name, number, company ] = contact.split(',')
+         //if (name && number){
+           addEntry(name, number, company)
+         //}
       })
       if (contacts.length > 0){
         loadDetails(0);
