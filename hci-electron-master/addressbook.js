@@ -12,6 +12,7 @@ $('#cancelbtn').on('click', () => {
 
 $('#addbtn').on('click', () => {
 
+  //GETTING INFO FROM FORMS INPUT FIELD
   let name = $('#contactname').val()
   let number = $('#contactnumber').val()
   let company = $('#contactcompany').val()
@@ -20,7 +21,8 @@ $('#addbtn').on('click', () => {
   let url = $('#contacturl').val()
   let birthday = $('#contactbirthday').val()
 
-  fs.appendFileSync('contacts.txt', name+","+number+'\n', (err) => {
+  //WRITING THE INFO ABOVE TO TEXT FILE
+  fs.appendFileSync('contacts.txt', name+","+number+ "," + company + "," + address + "," + email + "," + birthday + "," + url+'\n', (err) => {
     if (err) throw err;
     console.log("the data was appended!");
   });
@@ -34,15 +36,16 @@ function addEntry(name, number){
   var contact = {};
   contact['name'] = name;
   contact['number'] = number;
-  contact['company'] = company;
-  contact['address'] = address;
-  contact['email'] = email;
-  contact['url'] = url;
-  contact['birthday'] = birthday;
+  // contact['company'] = company;
+  // contact['address'] = address;
+  // contact['email'] = email;
+  // contact['url'] = url;
+  // contact['birthday'] = birthday;
   contacts.push(contact);
   var index = contacts.length-1;
 
-  let updateString = "<tr onclick='loadDetails(" + index + ")'><td>" + name + "</td><td>" + number + "</td><td>" + company + "</td><td>" + address + "</td><td>" + email + "</td><td>" + birthday + "</td><td>" + url + "</td></tr>"
+  let updateString = "<tr onclick='loadDetails(" + index + ")'><td>" + name + "</td><td>" + number + "</td></tr>"
+  //<td>" + company + "</td><td>" + address + "</td><td>" + email + "</td><td>" + birthday + "</td><td>" + url + "</td></tr>"
 
   $('#contactlist').append(updateString)
 }
@@ -51,6 +54,11 @@ function loadDetails(index){
     var contact = contacts[index];
     $('#selectedname').text(contact.name);
     $('#selectednumber').text(contact.number);
+    $('#selectedcompany').text(contact.company);
+    $('#selectedaddress').text(contact.address);
+    $('#selectedemail').text(contact.email);
+    $('#selectedurl').text(contact.url);
+    $('#selectedbirthday').text(contact.birthday);
     $('#deletebtn').off('click');
     $('#deletebtn').on('click', () => {
       deleteEntry(index);
