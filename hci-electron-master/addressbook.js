@@ -33,6 +33,7 @@ $('#cancelbtn').on('click', () => {
 // })
 const addbtn = document.getElementById('addbtn');
 const contactemail = document.getElementById('contactemail');
+const urlTag = document.getElementById('selectedurl');
 
 // contactemail.addEventListener('keyup', function (event) {
 //   isValidEmail = contactemail.checkValidity();
@@ -44,14 +45,14 @@ const contactemail = document.getElementById('contactemail');
 //   }
 // });
 
-function emailValidation(){
-  console.log("email validating")
-  isValidEmail = contactemail.checkValidity();
-
-  if (isValidEmail ) {
-    addbtn.disabled = false;
-  }
-}
+// function emailValidation(){
+//   console.log("email validating")
+//   isValidEmail = contactemail.checkValidity();
+//
+//   if (isValidEmail ) {
+//     addbtn.disabled = false;
+//   }
+// }
 
 function addbtnHandeler(){
   let name = document.getElementById("contactname").value;
@@ -108,6 +109,7 @@ function loadDetails(index){
     $('#selecteaddress').text(contact.address);
     $('#selectedemail').text(contact.email);
     $('#selectedurl').text(contact.url);
+    $('#selectedurl').attr("href", contact.url);
     $('#selectedbirthday').text(contact.birthday);
 
     $('#deletebtn').off('click');
