@@ -63,7 +63,7 @@ function addbtnHandeler(){
   let birthday = document.getElementById("contactbirthday").value;
 
   //WRITING THE INFO ABOVE TO TEXT FILE
-  fs.appendFileSync('contacts.txt', name+","+number+ "," + company + "," + address + "," + email + "," + birthday + "," + url+'\n', (err) => {
+  fs.appendFileSync('contacts.txt', name+"|"+number+ "|" + company + "|" + address + "|" + email + "|" + birthday + "|" + url+'\n', (err) => {
     if (err) throw err;
     console.log("the data was appended!");
   });
@@ -76,7 +76,7 @@ function addbtnHandeler(){
 
 //Need to pass in the data var as parameters and storing data in obj to be accessed
 //Gets called by loadAndDisplayContacts()
-function addEntry(name, number, company){
+function addEntry(name, number, company, address, email, birthday, url){
   //CREATRING OBJ
   //* conatct {
   //            name: Nikhil
@@ -87,10 +87,10 @@ function addEntry(name, number, company){
   contact['name'] = name;
   contact['number'] = number;
   contact['company'] = company;
-  // contact['address'] = address;
-  // contact['email'] = email;
-  // contact['url'] = url;
-  // contact['birthday'] = birthday;
+  contact['address'] = address;
+  contact['email'] = email;
+  contact['url'] = url;
+  contact['birthday'] = birthday;
   contacts.push(contact);
   var index = contacts.length-1;
 
@@ -105,10 +105,11 @@ function loadDetails(index){
     $('#selectedname').text(contact.name);
     $('#selectednumber').text(contact.number);
     $('#selectedcompany').text(contact.company);
-    $('#selectedaddress').text(contact.address);
+    $('#selecteaddress').text(contact.address);
     $('#selectedemail').text(contact.email);
     $('#selectedurl').text(contact.url);
     $('#selectedbirthday').text(contact.birthday);
+
     $('#deletebtn').off('click');
     $('#deletebtn').on('click', () => {
       deleteEntry(index);
@@ -132,19 +133,21 @@ function deleteEntry(index){
     loadAndDisplayContacts();
 }
 
+//READS FROM TXT AND CALLS addEntry()
 function loadAndDisplayContacts() {
    let filename = "contacts.txt";
 
    //Check if file exists
    if(fs.existsSync(filename)) {
+     //splitting at each line
       let data = fs.readFileSync(filename, 'utf8').split('\n')
       $('#contactlist').html("<tr><th>Name</th><th>Phone</th><th>Company</th></tr>");
       data.forEach((contact, index) => {
-         let [ name, number, company ] = contact.split(',')
+         let [ name, number, company, address, email, birthday, url ] = contact.split('|')
 
          //WILL ONLY ADD IF THE DATA FIELDS IN IF CONDITION FILLEED OUT
          if (name && number){
-           addEntry(name, number, company)
+           addEntry(name, number, company, address, email, birthday, url)
          }
       })
       if (contacts.length > 0){
@@ -152,6 +155,9 @@ function loadAndDisplayContacts() {
       }
    }
 }
+
+
+
 
 function showAddContactModal(){
   ipcRenderer.send('asynchronous-message', 'showModal')
