@@ -1,8 +1,14 @@
 const { ipcRenderer } = require('electron')
 
+
 let $ = require('jquery')
+//Filesystem module
 let fs = require('fs')
+
+//Dialogs module
+// const{dialog} = require("electron").remote;
 var contacts = [];
+var images =[];
 let modal;
 let vCard = require('vcf');
 
@@ -10,53 +16,15 @@ $('#cancelbtn').on('click', () => {
   ipcRenderer.send('asynchronous-message', 'closeModal')
 })
 
-//Upon clicking add we write the data from form into contacts.txt file
-// $('#addbtn').on('click', () => {
-//
-//   //GETTING INFO FROM FORMS INPUT FIELD
-//   let name = $("input[name=contactname]").val()
-//   let number = $('#contactnumber').val()
-//   let company = $("input[name=contactcompany]").val()
-//   let address = $('#contactaddress').val()
-//   let email = $('#contactemail').val()
-//   let url = $('#contacturl').val()
-//   let birthday = $('#contactbirthday').val()
-//
-//   //WRITING THE INFO ABOVE TO TEXT FILE
-//   fs.appendFileSync('contacts.txt', name+","+number+ "," + company + "," + address + "," + email + "," + birthday + "," + url+'\n', (err) => {
-//     if (err) throw err;
-//     console.log("the data was appended!");
-//   });
-//
-//   ipcRenderer.send('asynchronous-message', 'closeAndRefresh')
-//
-// })
 const addbtn = document.getElementById('addbtn');
 const contactemail = document.getElementById('contactemail');
 const urlTag = document.getElementById('selectedurl');
 
-// contactemail.addEventListener('keyup', function (event) {
-//   isValidEmail = contactemail.checkValidity();
-//
-//   if ( isValidEmail ) {
-//     addbtn.disabled = false;
-//   } else {
-//     addbtn.disabled = true;
-//   }
-// });
-
-// function emailValidation(){
-//   console.log("email validating")
-//   isValidEmail = contactemail.checkValidity();
-//
-//   if (isValidEmail ) {
-//     addbtn.disabled = false;
-//   }
-// }
 
 function addbtnHandeler(){
   let name = document.getElementById("contactname").value;
   let number = document.getElementById("contactnumber").value;
+  let cellNumber = document.getElementById("contactcellnumber").value;
   let company = document.getElementById("contactcompany").value;
   let address = document.getElementById("contactaddress").value;
   let email = document.getElementById("contactemail").value;
@@ -64,7 +32,7 @@ function addbtnHandeler(){
   let birthday = document.getElementById("contactbirthday").value;
 
   //WRITING THE INFO ABOVE TO TEXT FILE
-  fs.appendFileSync('contacts.txt', name+"|"+number+ "|" + company + "|" + address + "|" + email + "|" + birthday + "|" + url+'\n', (err) => {
+  fs.appendFileSync('contacts.txt', name+"|"+number+ "|" + cellNumber+ "|" + company + "|" + address + "|" + email + "|" + birthday + "|" + url+'\n', (err) => {
     if (err) throw err;
     console.log("the data was appended!");
   });
@@ -77,7 +45,7 @@ function addbtnHandeler(){
 
 //Need to pass in the data var as parameters and storing data in obj to be accessed
 //Gets called by loadAndDisplayContacts()
-function addEntry(name, number, company, address, email, birthday, url){
+function addEntry(name, number, cellNumber, company, address, email, birthday, url){
   //CREATRING OBJ
   //* conatct {
   //            name: Nikhil
@@ -87,6 +55,7 @@ function addEntry(name, number, company, address, email, birthday, url){
   var contact = {};
   contact['name'] = name;
   contact['number'] = number;
+  contact['cellNumber'] = cellNumber;
   contact['company'] = company;
   contact['address'] = address;
   contact['email'] = email;
@@ -95,7 +64,7 @@ function addEntry(name, number, company, address, email, birthday, url){
   contacts.push(contact);
   var index = contacts.length-1;
 
-  let updateString = "<tr onclick='loadDetails(" + index + ")'><td>" + name + "</td><td>" + number + "</td><td>" + company + "</td></tr>"
+  let updateString = "<tr onclick='loadDetails(" + index + ")'><td>" + name + "</td></tr>"
 
   //HTML code gets appended to left panel, adding rows to contact list <tr>
   $('#contactlist').append(updateString)
@@ -105,6 +74,7 @@ function loadDetails(index){
     var contact = contacts[index];
     $('#selectedname').text(contact.name);
     $('#selectednumber').text(contact.number);
+    $('#selectedcellNumber').text(contact.cellNumber);
     $('#selectedcompany').text(contact.company);
     $('#selecteaddress').text(contact.address);
     $('#selectedemail').text(contact.email);
@@ -145,11 +115,11 @@ function loadAndDisplayContacts() {
       let data = fs.readFileSync(filename, 'utf8').split('\n')
       $('#contactlist').html("<tr><th>Name</th><th>Phone</th><th>Company</th></tr>");
       data.forEach((contact, index) => {
-         let [ name, number, company, address, email, birthday, url ] = contact.split('|')
+         let [ name, number, cellNumber, company, address, email, birthday, url ] = contact.split('|')
 
          //WILL ONLY ADD IF THE DATA FIELDS IN IF CONDITION FILLEED OUT
          if (name && number){
-           addEntry(name, number, company, address, email, birthday, url)
+           addEntry(name, number, cellNumber, company, address, email, birthday, url)
          }
       })
       if (contacts.length > 0){
@@ -159,6 +129,33 @@ function loadAndDisplayContacts() {
 }
 
 
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+// render the image in our view
+function renderImage(file) {
+  images.push(file);
+// generate a new FileReader object
+  var reader = new FileReader();
+// inject an image with the src url
+  reader.onload = function(event) {
+    the_url = event.target.result
+    $('#preview').html("<img src='" + the_url + "' />")
+}// when the file is read it triggers the onload event above.
+  reader.readAsDataURL(file);
+}
+
+// handle input changes
+$("#the-file-input").change(function() {
+    console.log(this.files)
+    alert("file uploades!")
+
+    // grab the first image in the FileList object and pass it to the function
+    renderImage(this.files[0])
+
+});
+}
+else{
+  alert('The File APIs are not fully supported in this browser.');
+}
 
 
 function showAddContactModal(){

@@ -12,15 +12,13 @@
     <div class="contactlist">
       <div>
       <!-- ADD BUTTON -->
-      <h1>Nikhil's Contacts<span style="float:right"><i class="fas fa-plus-square" onclick="showAddContactModal();"></i></span></h1>
+      <h1>Contacts<span style="float:right"><i class="fas fa-plus-square" onclick="showAddContactModal();"></i></span></h1>
       </div>
       <hr>
       <!-- CONATCT LIST ON LEFT -->
       <table id="contactlist">
         <tr>
           <th>Name</th>
-          <th>Phone</th>
-          <th>Company</th>
         </tr>
       </table>
     </div>
@@ -28,28 +26,32 @@
     <!-- CONTACT PIC -->
       <div class="contactpic">
         <img src="default.png" width="150px" >
-        <div style="text-align:center">
-          <span style="color:white"><i class="fas fa-edit"></i></span>
-          <span style="color:white"><i id="deletebtn" class="fas fa-trash-alt"></i></span>
-        </div>
-
       </div>
+      <div> <h1 id="selectedname" style="text-align:center;"/> </div>
       <div class="contactinfo">
         <!-- TABLE ON RIGHT PANEL  -->
         <table>
-          <tr>
+          <!-- <tr>
             <td>
               Name
             </td>
             <td id="selectedname">
 
             </td>
+          </tr> -->
+          <tr>
+            <td>
+              Home Number
+            </td>
+            <td id="selectednumber">
+
+            </td>
           </tr>
           <tr>
             <td>
-              Phone
+              Mobile Number
             </td>
-            <td id="selectednumber">
+            <td id="selectedcellNumber">
 
             </td>
           </tr>
@@ -91,14 +93,19 @@
             </td>
             <td>
               <a href="http://nikhilmithani.com/" id="selectedurl">
-                
+
               </a>
             </td>
           </tr>
         </table>
+        <div style="padding: 0px 25px;">
+          <span style="text-align:left; color:white"><i class="fas fa-edit"  onclick="showAddContactModal();"></i></span>
+          <span style="padding: 0px 25px; color:white"><i id="deletebtn" class="fas fa-trash-alt"></i></span>
+        </div>
       </div>
     </div>
   </div>
+
 </body>
 
 <!-- add scripts at the bottom, so that the DOM is defined when they load -->
