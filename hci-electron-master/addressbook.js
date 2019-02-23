@@ -90,12 +90,15 @@ function loadDetails(index){
 
 function deleteEntry(index){
 
+    //Deleteting from contacts array starting at index and deleting 1 item
     contacts.splice(index, 1);
+
+    //
     fs.truncateSync('contacts.txt');
 
     contacts.forEach((contact, index) => {
 
-      fs.appendFileSync('contacts.txt', contact.name+","+contact.number+'\n', (err) => {
+      fs.appendFileSync('contacts.txt',contact.name+"|"+contact.number+ "|" + contact.cellNumber+ "|" + contact.company + "|" + contact.address + "|" + contact.email + "|" + contact.birthday + "|" + contact.url+'\n', (err) => {
         if (err) throw err;
         console.log("the data was appended!");
       });
@@ -113,7 +116,7 @@ function loadAndDisplayContacts() {
    if(fs.existsSync(filename)) {
      //splitting at each line
       let data = fs.readFileSync(filename, 'utf8').split('\n')
-      $('#contactlist').html("<tr><th>Name</th><th>Phone</th><th>Company</th></tr>");
+      $('#contactlist').html("<tr></tr>");
       data.forEach((contact, index) => {
          let [ name, number, cellNumber, company, address, email, birthday, url ] = contact.split('|')
 
