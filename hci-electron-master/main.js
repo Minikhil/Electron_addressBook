@@ -24,21 +24,14 @@ ipcMain.on('asynchronous-message', (event, arg) => {
 
 function showAddContactModal(){
   // create a dialog window for modal inputs
-  modal = new BrowserWindow({parent:win, modal:true, show:false, width:600, height:500, frame:false})
+  modal = new BrowserWindow({parent:win, modal:true, show:false, width:300, height:400, frame:false})
   modal.loadFile('addContact.html');
   modal.once('ready-to-show', () => {
     modal.show();
   })
 }
 
-function showEditContactModal(){
-  // create a dialog window for modal inputs
-  modal = new BrowserWindow({parent:win, modal:true, show:false, width:300, height:300, background:grey, frame:false})
-  modal.loadFile('editContact.html');
-  modal.once('ready-to-show', () => {
-    modal.show();
-  })
-}
+
 
 
 function createWindow () {

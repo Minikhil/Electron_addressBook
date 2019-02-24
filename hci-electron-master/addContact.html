@@ -2,16 +2,22 @@
 <html>
 <head>
   <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css" rel="stylesheet" />
-  
+  <style>
+
+  input{
+    width: 100%;
+    text-align: center;
+  }
+  </style>
 </head>
 <body>
 <form id="addform" action="" onSubmit="return addbtnHandeler()">
 
-  <input type="text" name="contactname" id="contactname" placeholder="Name"   />
+  <input type="text" name="contactname" id="contactname" placeholder="Name" required   />
   <br>
 
 
-  <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="contactnumber" id="contactnumber" placeholder="Home Number: xxx-xxx-xxx"  />
+  <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="contactnumber" id="contactnumber" placeholder="Home Number:xxx-xxx-xxx"  />
   <br>
 
   <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="contactnumber" id="contactcellnumber" placeholder="Mobile Number: xxx-xxx-xxx"  />
@@ -20,7 +26,8 @@
   <input type="text" name="contactcompany" id="contactcompany" placeholder="Company"  />
   <br>
 
-  <input type="email" pattern="[a-z]+[a-z0-9]*[._-]?[a-z0-9]*[._-]?@[a-z0-9.-]+\.[a-z]{2,63}$" name="contactemail" id="contactemail" oninput="emailValidation()" placeholder="Email" />
+  <label>Email</label>
+  <input type="email" pattern="[a-z]+[a-z0-9]*[._-]?[a-z0-9]*[._-]?@[a-z0-9.-]+\.[a-z]{2,63}$" name="contactemail" id="contactemail" oninput="emailValidation()" placeholder="email@gmail.com" />
   <br>
 
   <input type="text" name="contactaddress" id="contactaddress" placeholder="Address"  />
@@ -28,13 +35,14 @@
 
 
 
-
+<label>Birthday</label>
   <input type="date" name="contactbirthday" id="contactbirthday" placeholder="Birthday"  />
   <br>
 
-  <label>URL</label>
+  <label>URL (include: https:// )</label>
+  <br>
   <input type="url" name="contacturl" id="contacturl" placeholder="https://example.com"
-       pattern="https://.*" value = "https://" />
+       pattern="https://.*" />
   <br>
 
   <label>Photo</label>

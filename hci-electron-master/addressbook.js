@@ -46,6 +46,7 @@ function addbtnHandeler(){
 //Need to pass in the data var as parameters and storing data in obj to be accessed
 //Gets called by loadAndDisplayContacts()
 function addEntry(name, number, cellNumber, company, address, email, birthday, url){
+  console.log("add entry was called")
   //CREATRING OBJ
   //* conatct {
   //            name: Nikhil
@@ -83,8 +84,10 @@ function loadDetails(index){
     $('#selectedbirthday').text(contact.birthday);
 
     $('#deletebtn').off('click');
+
+    //Passing in the index of the loaded contact and calling updateContactList()
     $('#deletebtn').on('click', () => {
-      deleteEntry(index);
+      updateContactList(index);
     })
 }
 
@@ -93,12 +96,12 @@ function deleteEntry(index){
     //Deleteting from contacts array starting at index and deleting 1 item
     contacts.splice(index, 1);
 
-    //
+
     fs.truncateSync('contacts.txt');
 
-    contacts.forEach((contact, index) => {
+    contacts.forEach((contact, i) => {
 
-      fs.appendFileSync('contacts.txt',contact.name+"|"+contact.number+ "|" + contact.cellNumber+ "|" + contact.company + "|" + contact.address + "|" + contact.email + "|" + contact.birthday + "|" + contact.url+'\n', (err) => {
+      fs.appendFileSync('contacts.txt',contact[i].name+"|"+contact[i].number+ "|" + contact[i].cellNumber+ "|" + contact[i].company + "|" + contact[i].address + "|" + contact[i].email + "|" + contact[i].birthday + "|" + contact[i].url+'\n', (err) => {
         if (err) throw err;
         console.log("the data was appended!");
       });
@@ -108,20 +111,44 @@ function deleteEntry(index){
     loadAndDisplayContacts();
 }
 
+function updateContactList(index){
+  console.log("update contact list");
+  contacts.splice(index, 1);
+
+  fs.truncateSync('contacts.txt');
+
+  //for each contact obj in contacts[], i increments
+  contacts.forEach((contact, i) => {
+      console.log("contact.name:" + contact.name)
+
+    fs.appendFile('contacts.txt',contact.name+"|"+contact.number+ "|" + contact.cellNumber+ "|" + contact.company + "|" + contact.address + "|" + contact.email + "|" + contact.birthday + "|" + contact.url+'\n', (err) => {
+      if (err) throw err;
+      console.log("the data was appended!");
+    });
+  });
+
+   contacts = [];
+   loadAndDisplayContacts();
+}
+
 //READS FROM TXT AND CALLS addEntry()
 function loadAndDisplayContacts() {
+  console.log("loadAndDisplayContacts called")
    let filename = "contacts.txt";
 
    //Check if file exists
    if(fs.existsSync(filename)) {
+     console.log("File exist in loadAndDisplayContacts")
      //splitting at each line
       let data = fs.readFileSync(filename, 'utf8').split('\n')
       $('#contactlist').html("<tr></tr>");
       data.forEach((contact, index) => {
+        console.log("in for each loop")
          let [ name, number, cellNumber, company, address, email, birthday, url ] = contact.split('|')
 
          //WILL ONLY ADD IF THE DATA FIELDS IN IF CONDITION FILLEED OUT
-         if (name && number){
+         if (name){
+           console.log("add entry was called upon")
            addEntry(name, number, cellNumber, company, address, email, birthday, url)
          }
       })
