@@ -1,6 +1,1 @@
-sarah,23425
-jim, 23423d
-asdf,asdf
-sarah,23425
-jim, 23423d
-Nikhil,646
+Nikhil Mithani||646-725-2164|Google|University at Buffalo, Amherest, 14228|nikhilmi@buffalo.edu|1997-04-28|https://nikhilmithani.com

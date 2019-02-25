@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.3.3/css/foundation.min.css" rel="stylesheet" />
+</head>
+<body>
+<h1> Edit Contact </h1>
+<form id="addform" action="" onSubmit="return addbtnHandeler()">
+
+  <input type="text" name="contactname" id="contactname" placeholder="Name"   />
+  <br>
+
+
+  <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="contactnumber" id="contactnumber" placeholder="Home Number: xxx-xxx-xxx"  />
+  <br>
+
+  <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="contactnumber" id="contactcellnumber" placeholder="Mobile Number: xxx-xxx-xxx"  />
+  <br>
+
+  <input type="text" name="contactcompany" id="contactcompany" placeholder="Company"  />
+  <br>
+
+  <input type="email" pattern="[a-z]+[a-z0-9]*[._-]?[a-z0-9]*[._-]?@[a-z0-9.-]+\.[a-z]{2,63}$" name="contactemail" id="contactemail" oninput="emailValidation()" placeholder="Email" />
+  <br>
+
+  <input type="text" name="contactaddress" id="contactaddress" placeholder="Address"  />
+  <br>
+
+
+
+
+  <input type="date" name="contactbirthday" id="contactbirthday" placeholder="Birthday"  />
+  <br>
+
+  <label>URL</label>
+  <input type="url" name="contacturl" id="contacturl" placeholder="https://example.com"
+       pattern="https://.*" value = "https://" />
+  <br>
+
+  <label>Photo</label>
+  <input type="file"  name="contactphoto" accept="image/*" id="the-file-input"  />
+  <br>
+  <div id="preview" >
+      <img src="default.png" width="50px" height="50px">      <!--image will be inserted here-->
+  </div>
+
+  <!-- <label>Load A Photo</label>
+  <input id="the-file-input"  type="file"> -->
+
+
+
+
+  <!-- <button id="addbtn" onclick="addbtnHandeler()" disabled>Add</button> -->
+  <button id="addbtn" type="submit">update</button>
+  <button id="cancelbtn">Cancel</button>
+
+
+
+</form>
+<script src="./addressbook.js"></script>
+<!-- <script src="//static.filestackapi.com/filestack-js/1.x.x/filestack.min.js"></script> -->
+</body>
+</html>

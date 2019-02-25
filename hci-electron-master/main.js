@@ -19,16 +19,19 @@ ipcMain.on('asynchronous-message', (event, arg) => {
   else if (arg =="closeModal"){
     modal.close();
   }
+
 })
 
 function showAddContactModal(){
   // create a dialog window for modal inputs
-  modal = new BrowserWindow({parent:win, modal:true, show:false, width:400, height:300, frame:false})
+  modal = new BrowserWindow({parent:win, modal:true, show:false, width:300, height:400, frame:false})
   modal.loadFile('addContact.html');
   modal.once('ready-to-show', () => {
     modal.show();
   })
 }
+
+
 
 
 function createWindow () {
@@ -40,7 +43,7 @@ function createWindow () {
   win.loadFile('index.html')
 
   // Open the DevTools.
-  // win.webContents.openDevTools()
+   //win.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {

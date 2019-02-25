@@ -3,11 +3,15 @@ html, body {
   margin:0;
   padding:0;
   height:100%;
+  color: #f5f5f5 ;
+  font-family: Helvetica Neue;
 }
+
+
 
 /* this is the wrapper around the entire app */
 .contactapp {
-  background: lightblue;
+  background:  #262626;
   display:flex;
   justify-content: center;
   align-items: stretch;
@@ -30,7 +34,7 @@ html, body {
 }
 
 .contactlist tr:nth-child(even) {
-  background:lightgray;
+  background:#808080;
 }
 
 .contactlist tr:hover {
@@ -41,12 +45,13 @@ html, body {
 
 /* right column, contact details */
 .contact{
-  background: darkblue;
+  background: #333333;
   padding:0px;
   margin:0px;
   height:100%;
   float:right;
   flex-basis: 40%;
+  color:  #f5f5f5 ;
 }
 
 .contactpic{
@@ -57,6 +62,5 @@ html, body {
 .contact table {
   padding:5px;
   margin:15px;
-  background:white;
   width:90%;
 }
