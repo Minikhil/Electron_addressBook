@@ -1,2 +1,3 @@
 # Electron_addressBook
-CSE 410 - Project 2
+Course project for CSE 410 (Human Computer Interaction).
+Created a desktop app to store contacts using Electron.
