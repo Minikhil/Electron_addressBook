@@ -171,12 +171,17 @@ function renderImage(file) {
     $('#preview').html("<img src='" + the_url + "' />")
 }// when the file is read it triggers the onload event above.
   reader.readAsDataURL(file);
+
+  let updateString = "<img src='" + the_url + "' />"
+
+  //HTML code gets appended to left panel, adding rows to contact list <tr>
+  $('#contactpic').append(updateString)
 }
 
 // handle input changes
 $("#the-file-input").change(function() {
     console.log(this.files)
-    alert("file uploades!")
+    alert("Image uploaded!")
 
     // grab the first image in the FileList object and pass it to the function
     renderImage(this.files[0])
@@ -211,7 +216,17 @@ function exportFile(){
     console.log('exporting contact '+contact.name);
     card = new vCard();
     card.set("n", contact.name);
+    var fn = contact.name.split(" ")
+    card.set("fn", fn[0]);
+    card.set("org", contact.company);
+    card.set("title", " ");
+    card.set("photo", "default.png");
     card.set("tel", contact.number);
+    card.set("tel", contact.cellNumber);
+    card.set("adr", contact.address);
+    card.set("email", contact.email);
+    card.set("url", contact.url);
+
     fs.appendFileSync("vcard.txt", card.toString(),(err) => {
       if (err) throw err;
       console.log("the data was exported!");
