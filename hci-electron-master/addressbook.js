@@ -223,6 +223,7 @@ function exportFile(){
     card.set("photo", "default.png");
     card.set("tel", contact.number);
     card.set("tel", contact.cellNumber);
+    card.set("birthday", contact.birthday);
     card.set("adr", contact.address);
     card.set("email", contact.email);
     card.set("url", contact.url);
@@ -231,6 +232,8 @@ function exportFile(){
       if (err) throw err;
       console.log("the data was exported!");
     });
+
+
 
   })
 }
