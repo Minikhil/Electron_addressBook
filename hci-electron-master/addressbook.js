@@ -233,7 +233,5 @@ function exportFile(){
       console.log("the data was exported!");
     });
 
-
-
   })
 }
