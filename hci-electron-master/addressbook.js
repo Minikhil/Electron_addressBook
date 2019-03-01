@@ -91,25 +91,25 @@ function loadDetails(index){
     })
 }
 
-function deleteEntry(index){
-
-    //Deleteting from contacts array starting at index and deleting 1 item
-    contacts.splice(index, 1);
-
-
-    fs.truncateSync('contacts.txt');
-
-    contacts.forEach((contact, i) => {
-
-      fs.appendFileSync('contacts.txt',contact[i].name+"|"+contact[i].number+ "|" + contact[i].cellNumber+ "|" + contact[i].company + "|" + contact[i].address + "|" + contact[i].email + "|" + contact[i].birthday + "|" + contact[i].url+'\n', (err) => {
-        if (err) throw err;
-        console.log("the data was appended!");
-      });
-    })
-
-    contacts = [];
-    loadAndDisplayContacts();
-}
+// function deleteEntry(index){
+//
+//     //Deleteting from contacts array starting at index and deleting 1 item
+//     contacts.splice(index, 1);
+//
+//
+//     fs.truncateSync('contacts.txt');
+//
+//     contacts.forEach((contact, i) => {
+//
+//        fs.appendFile('contacts.txt',contact.name+"|"+contact.number+ "|" + contact.cellNumber+ "|" + contact.company + "|" + contact.address + "|" + contact.email + "|" + contact.birthday + "|" + contact.url+'\n', (err) => {
+//         if (err) throw err;
+//         console.log("the data was appended!");
+//       });
+//     })
+//
+//     contacts = [];
+//     loadAndDisplayContacts();
+// }
 
 function updateContactList(index){
   console.log("update contact list");
@@ -127,7 +127,7 @@ function updateContactList(index){
     });
   });
 
-   contacts = [];
+  // contacts = [];
    loadAndDisplayContacts();
 }
 
@@ -135,6 +135,7 @@ function updateContactList(index){
 function loadAndDisplayContacts() {
   console.log("loadAndDisplayContacts called")
    let filename = "contacts.txt";
+   contacts = [];
 
    //Check if file exists
    if(fs.existsSync(filename)) {
